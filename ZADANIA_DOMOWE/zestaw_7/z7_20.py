@@ -66,6 +66,31 @@ def szyfruj_tekst_v2(tekst, klucz=3):
     return tekst_zaszyfrowany
 
 
-print(szyfruj_tekst_v2("abc-ABC = XYZ & zyz"))
+test_szyfruj_v2 = szyfruj_tekst_v2("abc-ABC = XYZ & zyz")
+print("tekst: abc-ABC = XYZ & zyz, zaszyfrowany: ", test_szyfruj_v2)
 
 
+def odszyfruj_tekst_v2(tekst, klucz=3):
+    tekst_odszyfrowany = ""
+
+    for znak in tekst:
+        if czy_z_alfabetu_ang_v2(znak):
+            wartosc_liczbowa = ord(znak)
+            if wartosc_liczbowa in range(65, 91):
+                if wartosc_liczbowa - klucz < 65:
+                    wartosc_liczbowa += 26
+                nowy_znak = chr(wartosc_liczbowa - klucz)
+            else:
+                if wartosc_liczbowa - klucz < 97:
+                    wartosc_liczbowa += 26
+                nowy_znak = chr(wartosc_liczbowa - klucz)
+
+            tekst_odszyfrowany += nowy_znak
+        else:
+            tekst_odszyfrowany += znak
+
+    return tekst_odszyfrowany
+
+
+tekst_odszyfruj_v2 = odszyfruj_tekst_v2(test_szyfruj_v2)
+print("tekst:", test_szyfruj_v2, " odszyfroany: ", tekst_odszyfruj_v2)
